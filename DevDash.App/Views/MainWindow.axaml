@@ -1,0 +1,33 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:views="using:DevDash.App.Views"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="using:DevDash.App.ViewModels"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="DevDash.App.Views.MainWindow"
+        x:DataType="vm:MainWindowViewModel"
+        Title="DevDash.App.Views">
+
+        <Grid ColumnDefinitions="200, *">
+
+            <StackPanel Grid.Column="0" Spacing="10" Margin="10">
+                    <TextBlock Text="{Binding PageTitle}" FontWeight="Bold" Margin="0,0,0,20"/>
+
+                    <Button Content="Home" Command="{Binding GoToHomeCommand}" HorizontalAlignment="Stretch"/>
+                    <Button Content="Snippet Vault" Command="{Binding GoToSnippetVaultCommand}" HorizontalAlignment="Stretch"/>
+            </StackPanel>
+
+            <TransitioningContentControl Grid.Column="1" Content="{Binding CurrentView}">
+                <TransitioningContentControl.DataTemplates>
+                    <DataTemplate DataType="{x:Type vm:HomeViewModel}">
+                        <views:HomeView/>
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type vm:SnippetVaultViewModel}">
+                        <views:SnippetVaultView/>
+                    </DataTemplate>
+                </TransitioningContentControl.DataTemplates>
+            </TransitioningContentControl>
+        </Grid>
+
+</Window>
